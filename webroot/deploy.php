@@ -38,12 +38,12 @@ set('writable_dirs', ['webroot/storage', 'webroot/vendor']);
 
 // Set webroot folder.
 env('release_webroot', function () {
-  return str_replace("\n", '', run("readlink {{deploy_path}}/release")) . '/webroot';
+  return str_replace("\n", '', run("readlink {{deploy_path}}/current")) . '/webroot';
 });
 
 // Release path.
 env('release_path', function () {
-  return str_replace("\n", '', run("readlink {{deploy_path}}/release"));
+  return str_replace("\n", '', run("readlink {{deploy_path}}/current"));
 });
 
 /**
@@ -76,7 +76,7 @@ task('change_permissions', function() {
  * Reference: http://sentinelstand.com/article/laravel-5-optimization-commands.
  */
 task('optimise', function() {
-  cd('{{deploy_path}}/release/webroot');
+  cd('{{release_webroot}}');
   run('php artisan optimize');
   run('php artisan config:cache');
   //run('php artisan route:cache');
