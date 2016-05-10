@@ -49,7 +49,7 @@ task('change_permissions', function() {
 
 // Symlink .env file.
 task('environment', function() {
-  run("ln -s {{path}}/shared/.env {{release_webroot}}");
+  run("ln -s {{deploy_path}}/shared/.env {{release_webroot}}");
 });
 
 /**
