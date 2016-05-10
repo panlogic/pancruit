@@ -38,12 +38,12 @@ set('writable_dirs', ['webroot/storage', 'webroot/vendor']);
 
 // Set webroot folder.
 env('release_webroot', function () {
-  return str_replace("\n", '', run("readlink {{deploy_path}}/current")) . '/webroot';
+  return str_replace("\n", '', run("readlink {{deploy_path}}/release")) . '/webroot';
 });
 
 // Release path.
 env('release_path', function () {
-  return str_replace("\n", '', run("readlink {{deploy_path}}/current"));
+  return str_replace("\n", '', run("readlink {{deploy_path}}/release"));
 });
 
 /**
@@ -63,7 +63,7 @@ task('deploy:vendors', function () {
 
 // Make deployed files writable to www-data group.
 task('change_permissions', function() {
-  run("chmod -R g+w {{release_path}}");
+  run("chmod -R g+w {{deploy_path}}/release/webroot");
 });
 
 // Symlink .env file.
@@ -76,7 +76,7 @@ task('change_permissions', function() {
  * Reference: http://sentinelstand.com/article/laravel-5-optimization-commands.
  */
 task('optimise', function() {
-  cd('{{release_webroot}}');
+  cd('{{deploy_path}}/release/webroot');
   run('php artisan optimize');
   run('php artisan config:cache');
   //run('php artisan route:cache');
