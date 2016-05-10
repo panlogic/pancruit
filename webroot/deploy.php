@@ -60,7 +60,7 @@ task('optimise', function() {
   cd('{{deploy_path}}/release/webroot');
   run('php artisan optimize');
   run('php artisan config:cache');
-  run('php artisan route:cache');
+  //run('php artisan route:cache');
 });
 
 
