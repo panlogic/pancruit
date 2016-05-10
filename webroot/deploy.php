@@ -47,7 +47,7 @@ env('release_path', function () {
 });
 
 // Override default release_name with applying BST timezone first.
-date_default_timezone_set('BST');
+date_default_timezone_set('Europe/London');
 $new_release_name = date('YmdHis');
 env('release_name', $new_release_name);
 
