@@ -46,6 +46,11 @@ env('release_path', function () {
   return str_replace("\n", '', run("readlink {{deploy_path}}/release"));
 });
 
+// Override default release_name with applying BST timezone first.
+date_default_timezone_set('BST');
+$new_release_name = date('YmdHis');
+env('release_name', $new_release_name);
+
 /**
  * TASKS
  */
