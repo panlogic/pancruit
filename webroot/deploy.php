@@ -66,11 +66,6 @@ task('change_permissions', function() {
   run("chmod -R g+w {{deploy_path}}/release/webroot");
 });
 
-// Symlink .env file.
-/*task('environment', function() {
-  run("ln -s {{deploy_path}}/shared/.env {{release_webroot}}");
-});*/
-
 /**
  * Run Laravel5 optimisation commands.
  * Reference: http://sentinelstand.com/article/laravel-5-optimization-commands.
@@ -81,7 +76,6 @@ task('optimise', function() {
   run('php artisan config:cache');
   //run('php artisan route:cache');
 });
-
 
 /**
  * Deployment script.
