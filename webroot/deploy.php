@@ -17,6 +17,25 @@ set('repository', 'git@github.com:panlogic/pancruit.git');
 // Path to composer.
 set('composer_command', 'composer');
 
+/**
+ * Append webroot to default recipe
+ */
+
+// Laravel shared dirs
+set('shared_dirs', [
+    'webroot/storage/app',
+    'webroot/storage/framework/cache',
+    'webroot/storage/framework/sessions',
+    'webroot/storage/framework/views',
+    'webroot/storage/logs',
+]);
+
+// Laravel 5 shared file
+set('shared_files', ['webroot/.env']);
+
+// Laravel writable dirs
+set('writable_dirs', ['webroot/storage', 'webroot/vendor']);
+
 // Set webroot folder.
 env('release_webroot', function () {
   return str_replace("\n", '', run("readlink {{deploy_path}}/release")) . '/webroot';
@@ -48,9 +67,9 @@ task('change_permissions', function() {
 });
 
 // Symlink .env file.
-task('environment', function() {
+/*task('environment', function() {
   run("ln -s {{deploy_path}}/shared/.env {{release_webroot}}");
-});
+});*/
 
 /**
  * Run Laravel5 optimisation commands.
@@ -74,7 +93,6 @@ task('deploy', [
   'deploy:vendors',
   'deploy:shared',
   'change_permissions',
-  'environment',
   'optimise',
   'deploy:symlink',
   'cleanup',
