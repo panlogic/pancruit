@@ -18,6 +18,18 @@ class ApplicantController extends BaseController {
 	/**
 	 *
 	 *
+	 */
+	protected $applicantFactory;
+
+	/**
+	 *
+	 *
+	 */
+	protected $applicantRepository;
+
+	/**
+	 *
+	 *
 	 * @return Response
 	 */
 	public function __construct(ApplicantFactory $applicantFactory, ApplicantRepository $applicantRepository)
