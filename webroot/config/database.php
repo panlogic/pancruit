@@ -46,6 +46,12 @@ return [
 
     'connections' => [
 
+        'sqlite_testing' => [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ],
+
         'pancruit' => [
             'driver' => 'sqlite',
             'database' => storage_path('database/'.env('DB_DATABASE','').'-sqlite'),
