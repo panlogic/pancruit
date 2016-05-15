@@ -59,4 +59,8 @@ class Applicant extends AbstractModel
 		'passcode'
 	];
 
+	public function response()
+	{
+		return $this->hasOne('Panlogic\Models\Response','id','applicant_id');
+	}
 }
