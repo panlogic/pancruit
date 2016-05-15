@@ -10,6 +10,15 @@ class ApplicantIntegrationTest extends TestCase
 
 	use DatabaseMigrations;
 
+    function setUp() {
+        parent::setUp();
+        // Delete all applicants from memory before running test.
+        $applicant_ids = Applicant::all()->pluck('id')->toArray();
+        if (!empty($applicant_ids)) {
+            Applicant::destroy($applicant_ids);
+        }
+    }
+
     /** @test */
     function it_adds_an_applicant()
     {
