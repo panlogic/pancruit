@@ -9,11 +9,13 @@ class Applicant extends AbstractLibrary {
 	protected $phone;
 	protected $passcode;
 	protected $role;
+	protected $response;
 
 	public function __construct(array $components = []) {
 		$this->phone = isset($components['phone']) ? $components['phone'] : '';
 		$this->passcode = isset($components['passcode']) ? $components['passcode'] : '';
 		$this->role = isset($components['role']) ? $components['role'] : '';
+		$this->response = isset($components['response']) ? $components['response'] : '';
 	}
 
 	public function setPhone($phone = '') {
@@ -28,6 +30,10 @@ class Applicant extends AbstractLibrary {
 		$this->role = $role;
 	}
 
+	public function setResponse($response = '') {
+		$this->response = $response;
+	}
+
 	public function getPhone() {
 		return $this->phone;
 	}
@@ -38,5 +44,9 @@ class Applicant extends AbstractLibrary {
 
 	public function getRole() {
 		return $this->role;
+	}
+
+	public function getResponse() {
+		return $this->response;
 	}
 }
