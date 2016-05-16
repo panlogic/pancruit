@@ -2,8 +2,10 @@
 
 namespace Panlogic\Interfaces;
 
-use Panlogic\Interfaces\AbstractInterface;
+interface ApplicantInterface {
 
-interface ApplicantInterface extends AbstractInterface {
+	public function create($object);
+
+	public function all(array $columns);
 
 }

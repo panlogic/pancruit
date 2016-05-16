@@ -4,6 +4,6 @@ namespace Panlogic\Interfaces;
 
 interface FactoryInterface {
 
-	function make($data);
+	public function make($data);
 
 }

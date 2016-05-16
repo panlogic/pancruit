@@ -2,11 +2,10 @@
 
 namespace Panlogic\Repositories;
 
-use Panlogic\Repositories\AbstractRepository;
 use Panlogic\Interfaces\ApplicantInterface;
 use Panlogic\Models\Applicant;
 
-class ApplicantRepository extends AbstractRepository implements ApplicantInterface {
+class ApplicantRepository implements ApplicantInterface {
 
 	protected $model;
 

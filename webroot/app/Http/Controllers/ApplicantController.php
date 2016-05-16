@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController;
 use Panlogic\Factories\ApplicantFactory;
-use Panlogic\Repositories\ApplicantRepository;
+use Panlogic\Interfaces\ApplicantInterface as ApplicantRepository;
+use Panlogic\Criteria\LatestCriteria;
 
 class ApplicantController extends BaseController {
 
@@ -40,7 +41,6 @@ class ApplicantController extends BaseController {
 
 	public function index()
 	{
-
 		// Collect array of values to make an Applicant
 		$applicant = [
 			'phone' => '447841206889',
@@ -52,8 +52,10 @@ class ApplicantController extends BaseController {
 		// do stuff if necessary
 
 		// Persist the applicant object to the database and return the database applicant class
-		$applicant = $this->applicantRepository->create([ $applicantFactory ]);
+		//$applicant = $this->applicantRepository->create([ $applicantFactory ]);
+		//
+		$applicants = $this->applicantRepository->pushCriteria(new LatestCriteria())->all();
 
-		dd($applicant);
+		dd($applicants);
 	}
 }

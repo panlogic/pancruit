@@ -1,8 +1,8 @@
 <?php
 
-namespace Panlogic\Models;
+namespace Panlogic\Models\Eloquent;
 
-use Panlogic\Models\AbstractModel;
+use Panlogic\Models\Eloquent\AbstractModel;
 
 class Applicant extends AbstractModel
 {
