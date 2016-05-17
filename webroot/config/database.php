@@ -46,9 +46,15 @@ return [
 
     'connections' => [
 
-        'sqlite_testing' => [
+        'testing' => [
             'driver'   => 'sqlite',
-            'database' => ':memory:',
+            'database' => __DIR__.'/../database/testing.sqlite',
+            'prefix'   => '',
+        ],
+
+        'seeder' => [
+            'driver'   => 'sqlite',
+            'database' => __DIR__.'/../database/seeder.sqlite',
             'prefix'   => '',
         ],
 
