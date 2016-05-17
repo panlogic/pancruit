@@ -16,23 +16,23 @@ class ApplicantIntegrationTest extends TestCase
     }
     public function setupDatabase()
     {
-        dd('rm ' . __DIR__ . '/database/testing/testing.sqlite');
-        //exec('rm ' . __DIR__ . '/../database/testing/testing.sqlite');
-        //exec('cp ' . __DIR__ . '/../database/testing/seeder.sqlite ' . __DIR__ .'/../database/testing/testing.sqlite');
+        exec('rm ' . storage_path() . '/database/testing.sqlite');
+        exec('cp ' . storage_path() . '/database/seeder.sqlite ' . storage_path() .'/database/testing.sqlite');
     }
 
     /** @test */
     function it_adds_an_applicant()
     {
-    	$applicant = [
-    		'phone' => '447777777777',
-    	];
+    	//Applicant::create($applicant);
+        $model = new Applicant();
 
-    	Applicant::create($applicant);
+        $model->setConnection('testing');
 
-    	$applicants = Applicant::all();
+        dd($model);
 
-    	$this->assertCount(1,$applicants);
+    	$applicants = $model->all();
+
+        $this->assertCount(5,$applicants);
     }
 
 }

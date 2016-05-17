@@ -48,13 +48,13 @@ return [
 
         'testing' => [
             'driver'   => 'sqlite',
-            'database' => __DIR__.'/../database/testing.sqlite',
+            'database' => storage_path('database/testing.sqlite'),
             'prefix'   => '',
         ],
 
         'seeder' => [
             'driver'   => 'sqlite',
-            'database' => __DIR__.'/../database/seeder.sqlite',
+            'database' => storage_path('database/seeder.sqlite'),
             'prefix'   => '',
         ],
 

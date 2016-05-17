@@ -1,10 +1,10 @@
 <?php
 
-namespace Panlogic\Models;
+namespace Panlogic\Models\Eloquent;
 
-use Panlogic\Models\AbstractModel;
+use Panlogic\Models\Eloquent\AbstractModel;
 
-class Role extends AbstractModel
+class Solution extends AbstractModel
 {
 
 	/**
@@ -19,7 +19,7 @@ class Role extends AbstractModel
 	*
 	* @var 	string
 	*/
-	protected $table = 'roles';
+	protected $table = 'solutions';
 
 	/**
 	* The attributes that should be hidden from arrays.
@@ -55,18 +55,13 @@ class Role extends AbstractModel
 	* @var 	array
 	*/
 	protected $fillable = [
-		'enabled',
-		'name',
-		'content'
+		'question_id',
+		'weight',
+		'content',
 	];
 
-	public function questions()
+	public function question()
 	{
-		return $this->hasMany('Panlogic\Models\Question','id','role_id');
-	}
-
-	public function responses()
-	{
-		return $this->hasMany('Panlogic\Models\Response','id','role_id');
+		return $this->belongsTo('Panlogic\Models\Eloquent\Question','id','question_id');
 	}
 }

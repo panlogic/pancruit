@@ -54,7 +54,7 @@ class ApplicantController extends BaseController {
 		// Persist the applicant object to the database and return the database applicant class
 		//$applicant = $this->applicantRepository->create([ $applicantFactory ]);
 		//
-		$applicants = $this->applicantRepository->pushCriteria(new LatestCriteria())->all();
+		$applicants = $this->applicantRepository->all();
 
 		dd($applicants);
 	}

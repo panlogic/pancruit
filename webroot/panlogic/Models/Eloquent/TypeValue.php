@@ -1,10 +1,10 @@
 <?php
 
-namespace Panlogic\Models;
+namespace Panlogic\Models\Eloquent;
 
-use Panlogic\Models\AbstractModel;
+use Panlogic\Models\Eloquent\AbstractModel;
 
-class Solution extends AbstractModel
+class TypeValue extends AbstractModel
 {
 
 	/**
@@ -19,7 +19,7 @@ class Solution extends AbstractModel
 	*
 	* @var 	string
 	*/
-	protected $table = 'questions';
+	protected $table = 'type_values';
 
 	/**
 	* The attributes that should be hidden from arrays.
@@ -55,13 +55,13 @@ class Solution extends AbstractModel
 	* @var 	array
 	*/
 	protected $fillable = [
-		'question_id',
-		'weight',
+		'enabled',
+		'type_id',
 		'content',
 	];
 
-	public function question()
+	public function type()
 	{
-		return $this->belongsTo('Panlogic\Models\Question','id','question_id');
+		return $this->belongsTo('Panlogic\Models\Eloquent\Type','type_id','id');
 	}
 }

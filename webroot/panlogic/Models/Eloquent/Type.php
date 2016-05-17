@@ -4,7 +4,7 @@ namespace Panlogic\Models\Eloquent;
 
 use Panlogic\Models\Eloquent\AbstractModel;
 
-class Applicant extends AbstractModel
+class Type extends AbstractModel
 {
 
 	/**
@@ -19,7 +19,7 @@ class Applicant extends AbstractModel
 	*
 	* @var 	string
 	*/
-	protected $table = 'applicants';
+	protected $table = 'types';
 
 	/**
 	* The attributes that should be hidden from arrays.
@@ -55,12 +55,18 @@ class Applicant extends AbstractModel
 	* @var 	array
 	*/
 	protected $fillable = [
-		'phone',
-		'passcode'
+		'enabled',
+		'name',
 	];
 
-	public function response()
+	public function questions()
 	{
-		return $this->hasOne('Panlogic\Models\Eloquent\Response','id','applicant_id');
+		return $this->hasMany('Panlogic\Models\Eloquent\Question','id','question_id');
 	}
+
+	public function types()
+	{
+		return $this->hasMany('Panlogic\Models\Eloquent\TypeValue','id','type_id');
+	}
+
 }
