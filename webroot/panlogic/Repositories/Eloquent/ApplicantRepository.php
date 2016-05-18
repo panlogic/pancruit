@@ -5,34 +5,17 @@ namespace Panlogic\Repositories\Eloquent;
 use Panlogic\Interfaces\ApplicantInterface;
 use Panlogic\Interfaces\CriteriaInterface;
 use Panlogic\Models\Eloquent\Applicant;
-use Panlogic\Libraries\AbstractCriteria as Criteria;
-use Panlogic\Traits\CriteriaCRUD;
-use Illuminate\Support\Collection;
 
-class ApplicantRepository implements ApplicantInterface, CriteriaInterface {
-
-	use CriteriaCRUD;
+class ApplicantRepository implements ApplicantInterface {
 
 	protected $model;
-
-	/**
-     * @var Collection
-     */
-    protected $criteria;
-
-    /**
-     * @var bool
-     */
-    protected $skipCriteria = false;
 
 	/**
 	 * Construct the class
 	 * @param model
 	 */
-	public function __construct(Applicant $model, Collection $collection) {
+	public function __construct(Applicant $model) {
 		$this->model = $model;
-		$this->criteria = $collection;
-		$this->resetScope();
 	}
 
     /**
@@ -65,7 +48,6 @@ class ApplicantRepository implements ApplicantInterface, CriteriaInterface {
     }
 
     public function all(array $columns = ['*']) {
-    	$this->applyCriteria();
     	return $this->model->get($columns);
     }
 
