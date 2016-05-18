@@ -6,14 +6,6 @@ use Panlogic\Models\Eloquent\AbstractModel;
 
 class TypeValue extends AbstractModel
 {
-
-	/**
-	* The database connection used with the model.
-	*
-	* @var 	string
-	*/
-	protected $connection = 'pancruit';
-
 	/**
 	* The table associated with the model.
 	*

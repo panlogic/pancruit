@@ -8,8 +8,6 @@ use Panlogic\Models\Eloquent\Applicant;
 class ApplicantIntegrationTest extends TestCase
 {
 
-	use DatabaseMigrations;
-
     public function setUp(){
         parent::setUp();
         $this->setupDatabase();
@@ -23,12 +21,7 @@ class ApplicantIntegrationTest extends TestCase
     /** @test */
     function it_adds_an_applicant()
     {
-    	//Applicant::create($applicant);
         $model = new Applicant();
-
-        $model->setConnection('testing');
-
-        dd($model);
 
     	$applicants = $model->all();
 
