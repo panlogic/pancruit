@@ -21,11 +21,15 @@ class ApplicantIntegrationTest extends TestCase
     /** @test */
     function it_adds_an_applicant()
     {
-        $model = new Applicant();
+        $applicant = [
+            'phone' => '447777777777',
+        ];
 
-    	$applicants = $model->all();
+        Applicant::create($applicant);
 
-        $this->assertCount(5,$applicants);
+        $applicants = Applicant::all();
+
+        $this->assertCount(6,$applicants);
     }
 
 }
