@@ -61,6 +61,6 @@ class Applicant extends AbstractModel
 
 	public function response()
 	{
-		return $this->hasOne('Panlogic\Models\Response','id','applicant_id');
+		return $this->hasOne('Panlogic\Models\Response');
 	}
 }

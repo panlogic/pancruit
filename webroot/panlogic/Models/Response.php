@@ -60,14 +60,14 @@ class Response extends AbstractModel
 		'grade'
 	];
 
-	public function user()
+	public function applicant()
 	{
-		return $this->belongsTo('Panlogic\Models\Applicant','applicant_id','id');
+		return $this->belongsTo('Panlogic\Models\Applicant');
 	}
 
 	public function role()
 	{
-		return $this->belongsTo('Panlogic\Models\Role','role_id','id');
+		return $this->belongsTo('Panlogic\Models\Role');
 	}
 
 	public function answers()

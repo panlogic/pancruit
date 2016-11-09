@@ -3,46 +3,64 @@
 use Panlogic\Factories\RoleFactory;
 use Panlogic\Factories\ApplicantFactory;
 use Panlogic\Factories\ResponseFactory;
+use Panlogic\Repositories\ApplicantRepository;
+use Panlogic\Repositories\RoleRepository;
+use Panlogic\Repositories\ResponseRepository;
+use Panlogic\Models\Applicant;
+use Panlogic\Models\Role;
+use Panlogic\Models\Response;
 
-class ResponseUnitTest extends PHPUnit_Framework_TestCase
+class ResponseUnitTest extends TestCase
 {
-    protected $applicant;
     protected $response;
+    protected $applicant;
     protected $role;
 
     public function setUp() {
+        parent::setUp();
+
         $faker = Faker\Factory::create();
 
         // Create Applicant
-        $this->applicantFactory = new ApplicantFactory();
-        $this->applicant = $this->applicantFactory->make(['phone' => $faker->phoneNumber]);
-
-        // Create Role.
-        $this->roleFactory = new RoleFactory();
-        $this->role = $this->roleFactory->make([
-            'enabled' => true,
-            'name' => $faker->name,
-            'content' => $faker->paragraph
-        ]);
+        $applicantFactory = new ApplicantFactory();
+        $this->applicant = (new ApplicantRepository(new Applicant))->create(
+            $applicantFactory->make(['phone' => $faker->phoneNumber])
+        )->first();
 
         // Create Response.
-        $this->responseFactory = new ResponseFactory();
-        $this->response = $this->responseFactory->make(['grade' => 10]);
+        $responseFactory = new ResponseFactory();
+        $this->response = (new ResponseRepository(new Response))->create(
+            $responseFactory->make(['grade' => 10])
+        )->first();
 
-        // Attach Role and Applicant to Answer.
-        $this->response->setApplicant($this->applicant);
-        $this->response->setRole($this->role);
+        // Create Role.
+        $roleFactory = new RoleFactory();
+        $this->role = (new RoleRepository(new Role))->create(
+            $roleFactory->make([
+                'enabled' => true,
+                'name' => $faker->name,
+                'content' => $faker->paragraph
+            ])
+        )->first();
+        $this->role->save();
+
+        // Attach role to response.
+        $this->response->role()->associate($this->role);
+        $this->response->save();
+
+        // Attach response to applicant.
+        $this->applicant->response()->save($this->response);
     }
 
     /** @test */
     public function can_create_response() {
         // Check if Applicant is properly set.
-        $this->assertEquals($this->applicant->getPhone(), $this->response->getApplicant()->getPhone());
+        $this->assertEquals($this->applicant->phone, $this->response->applicant->phone);
 
         // Check if Role is properly set
-        $this->assertEquals($this->role->getName(), $this->response->getRole()->getName());
+        $this->assertEquals($this->role->name, $this->response->role->name);
 
         // Check response grade.
-        $this->assertEquals(10, $this->response->getGrade());
+        $this->assertEquals(10, $this->response->grade);
     }
 }

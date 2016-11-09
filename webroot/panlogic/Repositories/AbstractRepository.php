@@ -3,6 +3,7 @@
 namespace Panlogic\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 abstract class AbstractRepository
 {
@@ -33,7 +34,7 @@ abstract class AbstractRepository
         } else {
             $objects[] = $this->add( $object->toArray() );
         }
-        return $objects;
+        return collect($objects);
     }
 
     /**
