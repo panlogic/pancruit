@@ -14,7 +14,8 @@ class RoleRepository extends AbstractRepository implements RoleInterface {
 	 * Construct the class
 	 * @param model
 	 */
-	public function __construct(Role $model) {
+	public function __construct(Role $model = null) {
+		$model = $model ?: new Role;
 		$this->model = $model;
 	}
 

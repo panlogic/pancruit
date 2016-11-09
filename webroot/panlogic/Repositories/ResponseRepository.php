@@ -14,7 +14,8 @@ class ResponseRepository extends AbstractRepository implements ResponseInterface
 	 * Construct the class
 	 * @param model
 	 */
-	public function __construct(Response $model) {
+	public function __construct(Response $model = null) {
+		$model = $model ?: new Response;
 		$this->model = $model;
 	}
 

@@ -6,9 +6,6 @@ use Panlogic\Factories\ResponseFactory;
 use Panlogic\Repositories\ApplicantRepository;
 use Panlogic\Repositories\RoleRepository;
 use Panlogic\Repositories\ResponseRepository;
-use Panlogic\Models\Applicant;
-use Panlogic\Models\Role;
-use Panlogic\Models\Response;
 
 class ResponseUnitTest extends TestCase
 {
@@ -23,19 +20,19 @@ class ResponseUnitTest extends TestCase
 
         // Create Applicant
         $applicantFactory = new ApplicantFactory();
-        $this->applicant = (new ApplicantRepository(new Applicant))->create(
+        $this->applicant = (new ApplicantRepository)->create(
             $applicantFactory->make(['phone' => $faker->phoneNumber])
         )->first();
 
         // Create Response.
         $responseFactory = new ResponseFactory();
-        $this->response = (new ResponseRepository(new Response))->create(
+        $this->response = (new ResponseRepository)->create(
             $responseFactory->make(['grade' => 10])
         )->first();
 
         // Create Role.
         $roleFactory = new RoleFactory();
-        $this->role = (new RoleRepository(new Role))->create(
+        $this->role = (new RoleRepository)->create(
             $roleFactory->make([
                 'enabled' => true,
                 'name' => $faker->name,
