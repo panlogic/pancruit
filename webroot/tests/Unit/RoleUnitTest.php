@@ -1,28 +1,30 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Panlogic\Factories\RoleFactory;
+use Panlogic\Repositories\RoleRepository;
 
-class RoleUnitTest extends PHPUnit_Framework_TestCase
+class RoleUnitTest extends TestCase
 {
     protected $role;
-    protected $roleFactory;
 
     public function setUp() {
-        $this->roleFactory = new RoleFactory();
-        $this->role = $this->roleFactory->make([
-            'enabled' => true,
-            'name' => 'Developer',
-            'content' => 'To be a developer, one must have to like F1'
-        ]);
+        parent::setUp();
+
+        $roleFactory = new RoleFactory;
+        $this->role = (new RoleRepository)->create(
+            $roleFactory->make([
+                'enabled' => true,
+                'name' => 'Developer',
+                'content' => 'To be a developer, one must have to like F1'
+            ])
+        )->first();
+        $this->role->save();
     }
 
     /** @test */
     public function can_create_role() {
-        $this->assertTrue($this->role->isEnabled());
-        $this->assertEquals('Developer', $this->role->getName());
-        $this->assertEquals('To be a developer, one must have to like F1', $this->role->getContent());
+        $this->assertTrue((bool)$this->role->enabled);
+        $this->assertEquals('Developer', $this->role->name);
+        $this->assertEquals('To be a developer, one must have to like F1', $this->role->content);
     }
 }

@@ -15,8 +15,7 @@ class ApplicantRepository extends AbstractRepository implements ApplicantInterfa
 	 * @param model
 	 */
 	public function __construct(Applicant $model = null) {
-		$model = $model ?: new Applicant;
-		$this->model = $model;
+		$this->model = $model ?: new Applicant;
 	}
 
 }

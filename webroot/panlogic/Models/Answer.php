@@ -62,11 +62,12 @@ class Answer extends AbstractModel
 
 	public function response()
 	{
-		return $this->hasOne('Panlogic\Models\Response','id','response_id');
+		return $this->belongsTo('Panlogic\Models\Response');
 	}
 
 	public function question()
 	{
-		return $this->hasOne('Panlogic\Models\Question','id','question_id');
+		return $this->belongsTo('Panlogic\Models\Question');
 	}
 }
+// @TODO: revisit relationships. consider using pivot tables.

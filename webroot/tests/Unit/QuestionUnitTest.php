@@ -1,13 +1,19 @@
 <?php
 
 use Panlogic\Factories\ApplicantFactory;
-use Panlogic\Factories\RoleFactory;
 use Panlogic\Factories\QuestionFactory;
-use Panlogic\Factories\AnswerFactory;
 use Panlogic\Factories\ResponseFactory;
+use Panlogic\Factories\AnswerFactory;
+use Panlogic\Factories\RoleFactory;
+
+use Panlogic\Repositories\ApplicantRepository;
+use Panlogic\Repositories\QuestionRepository;
+use Panlogic\Repositories\ResponseRepository;
+use Panlogic\Repositories\AnswerRepository;
+use Panlogic\Repositories\RoleRepository;
 
 
-class QuestionUnitTest extends PHPUnit_Framework_TestCase
+class QuestionUnitTest extends TestCase
 {
     protected $role;
     protected $applicant;
@@ -15,34 +21,59 @@ class QuestionUnitTest extends PHPUnit_Framework_TestCase
     protected $response;
 
     public function setUp() {
+        parent::setUp();
+
         $faker = Faker\Factory::create();
 
         // Create applicant.
         $applicantFactory = new ApplicantFactory();
-        $this->applicant = $applicantFactory->make(['phone' => $faker->phoneNumber]);
+        $this->applicant = (new ApplicantRepository)->create(
+            $applicantFactory->make(['phone' => $faker->phoneNumber])
+        )->first();
 
         // Create Answer.
+        //$answerFactory = new AnswerFactory();
+        //$this->answer = $answerFactory->make(['content' => $faker->paragraph]);
+
         $answerFactory = new AnswerFactory();
-        $this->answer = $answerFactory->make(['content' => $faker->paragraph]);
+        $this->answer = (new AnswerRepository)->create(
+            $answerFactory->make(['content' => $faker->paragraph])
+        )->first();
 
         // Create Response.
-        $this->responseFactory = new ResponseFactory();
-        $this->response = $this->responseFactory->make(['grade' => 10]);
+        $responseFactory = new ResponseFactory();
+        $this->response = (new ResponseRepository)->create(
+            $responseFactory->make(['grade' => 10])
+        )->first();
 
         // Create role.
         $roleFactory = new RoleFactory();
-        $this->role = $roleFactory->make([
-            'enabled' => true,
-            'name' => $faker->name,
-            'content' => $faker->paragraph
-        ]);
+        $this->role = (new RoleRepository)->create(
+            $roleFactory->make([
+                'enabled' => true,
+                'name' => $faker->name,
+                'content' => $faker->paragraph
+            ])
+        )->first();
+        $this->role->save();
+
 
         $questionFactory = new QuestionFactory();
-        $this->question = $questionFactory->make([
-            'enabled' => true,
-            'name' => 'name',
-            'content' => 'What is your name?'
-        ]);
+        $this->question = (new QuestionRepository)->create(
+            $questionFactory->make([
+                'enabled' => true,
+                'name' => 'name',
+                'content' => 'What is your name?'
+            ])
+        )->first();
+
+        // Attach role to response.
+        $this->response->role()->associate($this->role);
+        $this->response->save();
+        $this->answer->response()->associate($this->response);
+        $this->answer->save();
+
+        dd($this->response);
 
         // Glue everything together.
         // Attach role to applicant.
