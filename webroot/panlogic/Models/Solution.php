@@ -55,13 +55,12 @@ class Solution extends AbstractModel
 	* @var 	array
 	*/
 	protected $fillable = [
-		'question_id',
 		'weight',
 		'content',
 	];
 
 	public function question()
 	{
-		return $this->belongsTo('Panlogic\Models\Question','id','question_id');
+		return $this->belongsTo('Panlogic\Models\Question');
 	}
 }

@@ -55,8 +55,6 @@ class Response extends AbstractModel
 	* @var 	array
 	*/
 	protected $fillable = [
-		'role_id',
-		'applicant_id',
 		'grade'
 	];
 
@@ -72,6 +70,6 @@ class Response extends AbstractModel
 
 	public function answers()
 	{
-		return $this->hasMany('Panlogic\Models\Answer','applicant_id','applicant_id');
+		return $this->hasMany('Panlogic\Models\Answer');
 	}
 }

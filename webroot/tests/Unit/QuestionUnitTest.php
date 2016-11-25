@@ -58,6 +58,7 @@ class QuestionUnitTest extends TestCase
         $this->role->save();
 
 
+        // Create question.
         $questionFactory = new QuestionFactory();
         $this->question = (new QuestionRepository)->create(
             $questionFactory->make([
@@ -69,10 +70,9 @@ class QuestionUnitTest extends TestCase
 
         // Attach role to response.
         $this->response->role()->associate($this->role);
+        $this->response->answers()->save($this->answer);
         $this->response->save();
-        $this->answer->response()->associate($this->response);
-        $this->answer->save();
-
+        $this->response->fresh();
         dd($this->response);
 
         // Glue everything together.

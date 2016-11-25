@@ -55,14 +55,12 @@ class Answer extends AbstractModel
 	* @var 	array
 	*/
 	protected $fillable = [
-		'question_id',
-		'response_id',
 		'content'
 	];
 
 	public function response()
 	{
-		return $this->belongsTo('Panlogic\Models\Response');
+		return $this->hasOne('Panlogic\Models\Response');
 	}
 
 	public function question()
@@ -70,4 +68,3 @@ class Answer extends AbstractModel
 		return $this->belongsTo('Panlogic\Models\Question');
 	}
 }
-// @TODO: revisit relationships. consider using pivot tables.

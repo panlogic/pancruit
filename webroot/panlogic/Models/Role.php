@@ -62,11 +62,11 @@ class Role extends AbstractModel
 
 	public function questions()
 	{
-		return $this->hasMany('Panlogic\Models\Question','id','role_id');
+		return $this->hasMany('Panlogic\Models\Question');
 	}
 
 	public function responses()
 	{
-		return $this->hasMany('Panlogic\Models\Response','id','role_id');
+		return $this->hasMany('Panlogic\Models\Response');
 	}
 }

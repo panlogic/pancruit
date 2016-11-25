@@ -58,7 +58,5 @@ class Question extends AbstractModel
 		'enabled',
 		'name',
 		'content',
-		'role_id',
-		'type_id',
 	];
 }
