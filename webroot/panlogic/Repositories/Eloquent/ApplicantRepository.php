@@ -51,4 +51,8 @@ class ApplicantRepository implements ApplicantInterface {
     	return $this->model->get($columns);
     }
 
+    public function findByPhone($phone) {
+        return $this->model->where('phone',$phone)->first();
+    }
+
 }
